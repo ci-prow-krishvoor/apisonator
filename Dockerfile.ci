@@ -4,6 +4,8 @@ MAINTAINER Alejandro Martinez Ruiz <amr@redhat.com>
 ARG CIRCLECI_TOOLS="git openssh-clients tar gzip ca-certificates glibc-locale-source glibc-langpack-en"
 # set localtime to UTC and install basic build tools
 RUN (ln -s /usr/share/zoneinfo/UTC /etc/localtime 2> /dev/null || true) \
+    && sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-Linux-* \
+    && sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-Linux-* \
     && dnf install -y sudo git make gcc autoconf automake libtool gettext file \
        ${CIRCLECI_TOOLS} \
     && dnf clean all \
