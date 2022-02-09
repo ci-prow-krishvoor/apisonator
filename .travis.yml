@@ -1,0 +1,13 @@
+dist: bionic
+
+services:
+  - docker
+
+arch: ppc64le
+os: linux
+
+before_install:
+  - .travis/install_${TRAVIS_OS_NAME}_env.sh
+
+script:
+  - .travis/run_${TRAVIS_OS_NAME}_tests.sh
