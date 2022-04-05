@@ -1,9 +1,12 @@
-dist: bionic
+dist: focal
 
 services:
   - docker
 
-arch: ppc64le
+arch: 
+  - ppc64le
+  - s390x
+
 os: linux
 
 before_install:
