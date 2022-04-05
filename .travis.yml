@@ -1,3 +1,4 @@
+os: linux
 dist: focal
 
 services:
@@ -7,10 +8,6 @@ arch:
   - ppc64le
   - s390x
 
-os: linux
-
-before_install:
-  - .travis/install_${TRAVIS_OS_NAME}_env.sh
-
 script:
-  - .travis/run_${TRAVIS_OS_NAME}_tests.sh
+  - make ci-build
+  - IMAGE_NAME=quay.io/3scale/apisonator-ci:latest make test
